@@ -316,30 +316,34 @@ void erase(Category *user,int*n){
 //tim kiem danh muc theo ten
 void search(Category *user,int*n){
 	char searchName[50];
+	int arr[50];
+	int index=0;
 	int flag=-1;
-	printf("moi nhap ten tim kiem:");
+	printf ("moi ban nhap ten can tim:"); 
 	fgets(searchName,50,stdin);
 	searchName[strcspn(searchName,"\n")]='\0';
 	int i;
 	for(i=0;i<*n;i++){
-		if(strstr(searchName,user[i].categoryName)!=NULL){
-			flag=i;
-			break;
-		}
+		if(strstr(user[i].categoryName,searchName) !=NULL){
+			arr[index]=i;
+			index++;
+			flag=i; 
+		} 
 	}
 	if(flag==-1){
-		printf ("khong tim thay!!\n");
-		return;
-	}else{
+		printf("khong tim thay!!\n"); 
+	} else{
 		printf("============================================\n"); 
         printf("|\t     QUAN LY DANH MUC              |\n"); 
         printf("============================================\n"); 
         printf("| %-4s | %-10s | %-20s |\n", "STT", "ID", "TEN DANH MUC"); 
         printf("============================================\n");
-        printf("| %-4d | %-10s | %-20s |\n", flag + 1, user[flag].categoryId, user[flag].categoryName); 
-        printf("============================================\n");
+        for(i=0;i<index;i++){
+        	printf("| %-4d | %-10s | %-20s |\n", i+1, user[arr[i]].categoryId, user[arr[i]].categoryName); 
+            printf("============================================\n");
+		} 
 	}
-}
+}	 
 //menu lua chon sap xep
 void menumini(Category *user,int*n){
 	int choice;
@@ -602,29 +606,33 @@ void eraseproduct(Product *count,int*length){
 }
 //tim kiem san pham theo ten
 void searchproduct(Product *count,int*length){
-	char searchName2[50];
+	char searchName[50];
+	int arr[50];
+	int index=0;
 	int flag=-1;
-	printf("moi nhap ten tim kiem:");
-	fgets(searchName2,50,stdin);
-	searchName2[strcspn(searchName2,"\n")]='\0';
+	printf ("moi ban nhap ten can tim:"); 
+	fgets(searchName,50,stdin);
+	searchName[strcspn(searchName,"\n")]='\0';
 	int i;
 	for(i=0;i<*length;i++){
-		if(strstr(searchName2,count[i].productName)!=NULL){
-			flag=i;
-			break;
-		}
+		if(strstr(count[i].productName,searchName) != NULL){
+			arr[index]=i;
+			index++;
+			flag=i; 
+		} 
 	}
 	if(flag==-1){
-		printf ("khong tim thay!!\n");
-		return;
-	}else{
+		printf("khong tim thay!!\n"); 
+	} else{
 		printf("===============================================================================\n"); 
         printf("|                               QUAN LY SAN PHAM                              |\n"); 
         printf("===============================================================================\n"); 
         printf("| %-4s | %-10s | %-10s | %-20s | %-8s | %-8s |\n", "STT", "PRODUCTID", "CATEGORYID","TEN SAN PHAM","SO LUONG","GIA TIEN"); 
         printf("===============================================================================\n");
-        printf("| %-4d | %-10s | %-10s | %-20s | %-8d | %-8d |\n", flag+1, count[flag].productId, count[flag].categoryId, count[flag].productName,count[flag].quantity, count[flag].price); 
-        printf("===============================================================================\n");
+        for(i=0;i<index;i++){
+        	printf("| %-4d | %-10s | %-10s | %-20s | %-8d | %-8d |\n", i + 1, count[arr[i]].productId, count[arr[i]].categoryId, count[arr[i]].productName,count[arr[i]].quantity, count[arr[i]].price); 
+            printf("===============================================================================\n");
+		} 
 	}
 }
 //sap xep san pham
